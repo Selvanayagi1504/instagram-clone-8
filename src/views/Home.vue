@@ -159,7 +159,8 @@ export default {
         }
       })
       if(flag){
-        window.location.href="http://localhost:8080/upload"
+        // window.location.href="http://localhost:8080/upload"
+        this.$router.push({path: '/upload'})
         sessionStorage.setItem('email',this.moboremail)
       }
       else{
