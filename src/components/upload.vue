@@ -85,7 +85,7 @@
             this.cats = []
             // this.comment = []
             let email = sessionStorage.getItem('email');
-            let users = JSON.parse(localStorage.getItem("users"));
+            let users = JSON.parse(localStorage.getItem("instausers"));
             console.log(email)
             users.forEach(user => {
                 if ((user.moboremail == email) || (user.uname==email) || (user.email==email)) {
@@ -130,7 +130,7 @@
                 console.log(likes)
 
                 let email = sessionStorage.getItem('email');
-                let users = JSON.parse(localStorage.getItem("users"));
+                let users = JSON.parse(localStorage.getItem("instausers"));
                 let newusers=[];
                 let newposts=[];
                 users.forEach(user => {
@@ -167,7 +167,7 @@
                         newusers.push(user);
                     }
                 })
-                localStorage.setItem("users", JSON.stringify(newusers));
+                localStorage.setItem("instausers", JSON.stringify(newusers));
                 // console.log(img)
                this.temp=this.image1;
                 this.image1 = this.image2;
