@@ -92,6 +92,9 @@ export default {
     }
   },
   mounted() {
+    if (localStorage.getItem("users") === null) {
+      localStorage.setItem("users",this.users)
+ }
     if(localStorage.getItem("users")) {
       try {
         this.users = JSON.parse(localStorage.getItem("users"));
@@ -140,6 +143,8 @@ export default {
       // let parsed = JSON.stringify(this.row);
       // localStorage.setItem(this.moboremail, parsed);
       localStorage.setItem("users",JSON.stringify(this.users));
+        this.$router.push({path: '/signup'})
+
     }
   }
 }
