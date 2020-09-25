@@ -580,7 +580,7 @@
             this.uname = []
             this.fname = []
             let email = sessionStorage.getItem('email');
-            let users = JSON.parse(localStorage.getItem("users"));
+            let users = JSON.parse(localStorage.getItem("instausers"));
             console.log(email)
             users.forEach(user => {
                 if ((user.moboremail == email) || (user.uname == email) || (user.email == email)) {
@@ -606,7 +606,7 @@
             },
             submitchange() {
                 let email = sessionStorage.getItem('email');
-                let users = JSON.parse(localStorage.getItem("users"));
+                let users = JSON.parse(localStorage.getItem("instausers"));
                 
                 let newusers = [];
                  if (!(this.fname)) {
@@ -642,7 +642,7 @@
                     }
                 })
                 console.log(newusers)
-                localStorage.setItem("users", JSON.stringify(newusers));
+                localStorage.setItem("instausers", JSON.stringify(newusers));
             },
             validEmail: function (email) {
                 var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -654,7 +654,7 @@
             // },
             changepassword() {
                 let email = sessionStorage.getItem('email');
-                let users = JSON.parse(localStorage.getItem("users"));
+                let users = JSON.parse(localStorage.getItem("instausers"));
                 let newusers = [];
                 users.forEach(user => {
                     if (((user.moboremail == email) || (user.uname == email) || (user.email == email))) {
@@ -681,7 +681,7 @@
                     }
                 })
                 console.log(newusers)
-                localStorage.setItem("users", JSON.stringify(newusers));
+                localStorage.setItem("instausers", JSON.stringify(newusers));
             }
         }
     }

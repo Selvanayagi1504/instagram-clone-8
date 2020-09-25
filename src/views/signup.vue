@@ -92,14 +92,17 @@ export default {
     }
   },
   mounted() {
-    if(localStorage.getItem("users")) {
+    if(localStorage.getItem("instausers")===null){
+      localStorage.setItem("instausers",JSON.stringify(this.users));
+    }
+    if(localStorage.getItem("instausers")) {
       try {
-        this.users = JSON.parse(localStorage.getItem("users"));
+        this.users = JSON.parse(localStorage.getItem("instausers"));
       } catch(e) {
-        localStorage.removeItem("users");
+        localStorage.removeItem("instausers");
       }
     }
-    this.users=JSON.parse(localStorage.getItem("users"));
+    this.users=JSON.parse(localStorage.getItem("instausers"));
   },
   methods: {
     addCat() {
@@ -139,7 +142,7 @@ export default {
     saveCats() {
       // let parsed = JSON.stringify(this.row);
       // localStorage.setItem(this.moboremail, parsed);
-      localStorage.setItem("users",JSON.stringify(this.users));
+      localStorage.setItem("instausers",JSON.stringify(this.users));
     }
   }
 }

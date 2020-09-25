@@ -75,7 +75,7 @@
         },
         mounted() {
             let email = sessionStorage.getItem('email');
-            let users = JSON.parse(localStorage.getItem("users"));
+            let users = JSON.parse(localStorage.getItem("instausers"));
             console.log(email)
             users.forEach(user => {
                 if ((user.moboremail == email) || (user.uname == email) || (user.email == email)) {
@@ -87,7 +87,7 @@
         methods: {
             changepoto() {
                 let email = sessionStorage.getItem('email');
-                let users = JSON.parse(localStorage.getItem("users"));
+                let users = JSON.parse(localStorage.getItem("instausers"));
                 let newusers = [];
                 users.forEach(user => {
                     if ((user.moboremail == email) || (user.uname == email) || (user.email == email)) {
@@ -110,11 +110,11 @@
                     }
                 })
                 console.log(newusers)
-                localStorage.setItem("users", JSON.stringify(newusers));
+                localStorage.setItem("instausers", JSON.stringify(newusers));
             },
             remove() {
                 let email = sessionStorage.getItem('email');
-                let users = JSON.parse(localStorage.getItem("users"));
+                let users = JSON.parse(localStorage.getItem("instausers"));
                 let newusers = [];
                 users.forEach(user => {
                     if ((user.moboremail == email) || (user.uname == email) || (user.email == email)) {
@@ -137,7 +137,7 @@
                     }
                 })
                 console.log(newusers)
-                localStorage.setItem("users", JSON.stringify(newusers));
+                localStorage.setItem("instausers", JSON.stringify(newusers));
             }
         }
     }

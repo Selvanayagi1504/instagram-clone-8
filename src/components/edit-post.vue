@@ -81,7 +81,7 @@ export default {
             this.comment = []
             this.posts = []
             let email = sessionStorage.getItem('email');
-            let users = JSON.parse(localStorage.getItem("users"));
+            let users = JSON.parse(localStorage.getItem("instausers"));
             console.log(email)
             users.forEach(user => {
                 if ((user.moboremail == email) || (user.uname == email) || (user.email == email)) {
@@ -104,7 +104,7 @@ export default {
             removeimage(img){
                 // console.log(img);
                 let email = sessionStorage.getItem('email');
-                let users = JSON.parse(localStorage.getItem("users"));
+                let users = JSON.parse(localStorage.getItem("instausers"));
                 let newusers = [];
                 let newpost=[];
                 users.forEach(user => {
@@ -146,7 +146,7 @@ export default {
                     }
                 })
                 console.log(newusers)
-                localStorage.setItem("users", JSON.stringify(newusers));
+                localStorage.setItem("instausers", JSON.stringify(newusers));
             }
         }
 }
