@@ -266,10 +266,6 @@
                             likes:post.likes
                         }
                         this.catsrows.push(sam);
-                        // console.log(this.cats)
-                        // this.comments.push(post.comment);
-                        // console.log(post.path)
-                        // console.log(post.comment)
                     })
                     let i = 1;
                     let k = [];
@@ -339,14 +335,7 @@
             })
 
         },
-        //     computed: {
-        //     "columns": function columns() {
-        //       if (this.rows.length == 0) {
-        //         return [];
-        //       }
-        //       return Object.keys(this.rows[0])
-        //     }
-        //   },
+      
         methods: {
             getNow: function() {
                 const today = new Date();
@@ -356,17 +345,21 @@
                 this.timestamp = dateTime;
             },
             addimage() {
-                var post = {
-                    path: this.url_image,
-                    comment: this.comment_image,
-                    likes:"0",
-                    date:this.timestamp
+                if((!this.url_image))
+                    alert("provide image path");
+                else{
+                    var post = {
+                        path: this.url_image,
+                        comment: this.comment_image,
+                        likes:"0",
+                        date:this.timestamp
+                    }
+                    console.log(post)
+                    this.posts.push(post)
+                    this.url_image=''
+                    this.comment_image=''
+                    this.saveimage();
                 }
-                console.log(post)
-                this.posts.push(post)
-                this.url_image=''
-                this.comment_image=''
-                this.saveimage();
             },
             saveimage() {
                 let email = sessionStorage.getItem('email');
@@ -374,9 +367,6 @@
                 let newusers = [];
                 users.forEach(user => {
                     if ((user.moboremail == email) || (user.uname == email) || (user.email == email)) {
-                        // this.cat=user.fname;
-                        // this.comment=user.uname;
-                        // this.posts=user.posts
                         let cuser = {
                             moboremail: user.moboremail,
                             fname: user.fname,
@@ -397,54 +387,91 @@
                 })
                 console.log(newusers)
                 localStorage.setItem("instausers", JSON.stringify(newusers));
-            }
-            // removeimage(img){
-            //     // console.log(img);
-            //     let email = sessionStorage.getItem('email');
-            //     let users = JSON.parse(localStorage.getItem("instausers"));
-            //     let newusers = [];
-            //     let newpost=[];
-            //     users.forEach(user => {
-            //         if ((user.moboremail == email) || (user.uname == email) || (user.email == email)) {
-            //             // let i=0;
-            //             user.posts.forEach(post => {
-            //                 if(img!=post.path){
-            //                     // let cpost={
-            //                     //     path:post.path,
-            //                     //     comment:post.comment
-            //                     // }
-            //                     newpost.push(post);
-            //                     // console.log(newpost)
-            //                 }
-            //                 // i++;
-            //             })
+                this.cats = []
+            this.comment = []
+            this.posts = []
+            console.log(email)
+            users.forEach(user => {
+                if ((user.moboremail == email) || (user.uname == email) || (user.email == email)) {
+                    this.pro=user.profile
+                    this.cat = user.fname;
+                    this.comment = user.uname;
+                    this.posts = user.posts;
+                    user.posts.forEach(post => {
+                        var sam = {
+                            profile:user.profile,
+                            name: user.uname,
+                            path: post.path,
+                            comment: post.comment,
+                            likes:post.likes
+                        }
+                        this.catsrows.push(sam);
+                    })
+                    let i = 1;
+                    let k = [];
+                    var s;
+                    var m;
+                    user.posts.forEach(post => {
+                        if (i == 1) {
+                            s = post.path
+                            k = []
+                            k = {
+                                id: s
+                            }
+                        } else if (i == 2) {
+                            m = post.path
+                            k = []
+                            k = {
+                                id: s,
+                                name: m
+                            }
 
-            //             // console.log(newpost)
-            //         //     if(i==1){
-            //         //         newpost=[]
-            //         //     }
-            //             let cuser = {
-            //                 moboremail: user.moboremail,
-            //                 fname: user.fname,
-            //                 uname: user.uname,
-            //                 pass: user.pass,
-            //                 phone: user.phone,
-            //                 email: user.email,
-            //                 website: user.website,
-            //                 bio: user.bio,
-            //                 gender: user.gender,
-            //                 profile: user.profile,
-            //                 post: newpost
-            //             }
-            //             newusers.push(cuser);
-            //         } 
-            //         else {
-            //             newusers.push(user);
-            //         }
-            //     })
-            //     console.log(newusers)
-            //     localStorage.setItem("instausers", JSON.stringify(newusers));
-            // }
+                        } else if (i == 3) {
+                            k = []
+                            k = {
+                                id: s,
+                                name: m,
+                                phone: post.path
+                            }
+
+                        }
+                        i++;
+                        console.log(i)
+                        console.log(s)
+                        if (i == 4) {
+                            s = ""
+                            m = ""
+                            i = 1;
+                            this.rows.push(k)
+                            console.log(this.rows)
+                            k = []
+                        }
+                    })
+                    if (i > 1) {
+                        if (i == 2) {
+                            k = []
+                            k = {
+                                id: s,
+                                name: "https://convertingcolors.com/plain-FAFAFA.svg",
+                                phone: "https://convertingcolors.com/plain-FAFAFA.svg"
+                            }
+
+                        } else if (i == 3) {
+                            k = []
+                            k = {
+                                id: s,
+                                name: m,
+                                phone: "https://convertingcolors.com/plain-FAFAFA.svg"
+                            }
+
+                        }
+                        this.rows.push(k)
+                    }
+                    console.log(this.rows)
+                    this.profile_path = user.profile
+                }
+            })
+            }
         }
     }
 </script>

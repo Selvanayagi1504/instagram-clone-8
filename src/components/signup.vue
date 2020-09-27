@@ -17,11 +17,6 @@
                 </div>
                 <div id="sign">
                     <form>
-                        <!-- <input type="text" class="box-in" placeholder="Phone number, username, or email" name="moboremail" autocomplete="off"/>
-                        <input type="text" class="box-in" placeholder="First Name" name="fname" autocomplete="off"/>
-                        <input type="text" class="box-in" placeholder="Username" name="uname" autocomplete="off"/>
-                        <input type="password" class="box-in" placeholder="Password" name="pass" autocomplete="off"/>
-                        <button class="login-btn"  type="submit"><div class="">Log In</div></button> -->
                         <input v-model="moboremail" placeholder="Mobile number or username or email" class="box-in"> 
                         <input v-model="fname" placeholder="fname" class="box-in"> 
                         <input v-model="uname" placeholder="uname" class="box-in"> 
@@ -42,7 +37,6 @@
             </div>
             <div class="login">
                 <p class="signup">Have an account?
-                    <!-- <a href="#">Log In</a> -->
                     <router-link to="/home">Login</router-link>
                 </p>
             </div>
@@ -111,40 +105,45 @@ export default {
       var phoneno = /^[2-9]\d{2}-\d{3}-\d{4}$/;
       var phone=null;
       var email=null;
+      var flag=0;
       if(!this.moboremail.match(phoneno)){
         console.log("successs")
         phone=this.moboremail;
       }
       else{
         console.log("fail")
+        if (!this.validEmail(this.moboremail)) {
+            flag=1;
+            alert('Valid email required.');
+        }
         email=this.moboremail;
       }
-      var user={
-        moboremail:this.moboremail,
-        fname:this.fname,
-        uname:this.uname,
-        pass:this.pass,
-        phone:phone,
-        email:email,
-        website:null,
-        bio:null,
-        gender:null, 
-        profile:"https://www.iconfinder.com/data/icons/images-image-files-7/24/round_image_circle_picture_photo_photography-512.png",   
-        posts:[]
+      if(flag==0){
+        var user={
+          moboremail:this.moboremail,
+          fname:this.fname,
+          uname:this.uname,
+          pass:this.pass,
+          phone:phone,
+          email:email,
+          website:null,
+          bio:null,
+          gender:null, 
+          profile:"https://www.iconfinder.com/data/icons/images-image-files-7/24/round_image_circle_picture_photo_photography-512.png",   
+          posts:[]
+        }
+        this.users.push(user)
+        this.saveCats();
       }
-      this.users.push(user)
-      // this.row.push(this.moboremail);
-      // this.row.push(this.fname);
-      // this.row.push(this.uname);
-      // this.row.push(this.pass);
-      this.saveCats();
     },
     saveCats() {
-      // let parsed = JSON.stringify(this.row);
-      // localStorage.setItem(this.moboremail, parsed);
       localStorage.setItem("instausers",JSON.stringify(this.users));
-        this.$router.push({path: '/signup'})
+        this.$router.push({path: '/home'})
 
+    },
+    validEmail: function (email) {
+        var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
     }
   }
 }
@@ -201,7 +200,6 @@ body{
   width: 51%;
   margin-top: 5%;
   margin-bottom: 1em;
-  /* margin-left: 23%; */
 }
 
 .box-in{
@@ -210,7 +208,6 @@ body{
   width: 85%;
   margin-left: 6%;
   margin-right: 6%;
-  /* height: 6%; */
   border-radius: 4px;
   margin-bottom: 1em;
 }
@@ -230,7 +227,6 @@ button.login-btn {
   border: 1px solid #87CEEB;
   border-radius: 4px;
   width: 85%;
-  /* margin-left: 1.5em; */
   height: 6%;
   color:white;
 }

@@ -16,7 +16,6 @@
                     <img :src="require('./images/discover.png')" class="icon-side" />
                     <img :src="require('./images/activity.png')" class="icon-side" />
                     <router-link to="/profile">
-                        <!-- <img :src="require('./images/profile-icon.png')" class="icon-side" /> -->
                         <img :src="`${pro}`" style="width: 7%;border-radius: 16px;"/>
 
                     </router-link>
@@ -86,31 +85,41 @@
         },
         methods: {
             changepoto() {
-                let email = sessionStorage.getItem('email');
-                let users = JSON.parse(localStorage.getItem("instausers"));
-                let newusers = [];
-                users.forEach(user => {
-                    if ((user.moboremail == email) || (user.uname == email) || (user.email == email)) {
-                        let cuser = {
-                            moboremail: user.moboremail,
-                            fname: user.fname,
-                            uname: user.uname,
-                            pass: user.pass,
-                            phone: user.phone,
-                            email: user.email,
-                            website: user.website,
-                            bio: user.bio,
-                            gender: user.gender,
-                            profile: this.url,
-                            posts: user.posts
+                if(!this.url)
+                    alert("provide an url");
+                else{
+                    let email = sessionStorage.getItem('email');
+                    let users = JSON.parse(localStorage.getItem("instausers"));
+                    let newusers = [];
+                    users.forEach(user => {
+                        if ((user.moboremail == email) || (user.uname == email) || (user.email == email)) {
+                            let cuser = {
+                                moboremail: user.moboremail,
+                                fname: user.fname,
+                                uname: user.uname,
+                                pass: user.pass,
+                                phone: user.phone,
+                                email: user.email,
+                                website: user.website,
+                                bio: user.bio,
+                                gender: user.gender,
+                                profile: this.url,
+                                posts: user.posts
+                            }
+                            newusers.push(cuser);
+                        } else {
+                            newusers.push(user);
                         }
-                        newusers.push(cuser);
-                    } else {
-                        newusers.push(user);
-                    }
-                })
-                console.log(newusers)
-                localStorage.setItem("instausers", JSON.stringify(newusers));
+                    })
+                    console.log(newusers)
+                    localStorage.setItem("instausers", JSON.stringify(newusers));
+                    users.forEach(user => {
+                        if ((user.moboremail == email) || (user.uname == email) || (user.email == email)) {
+                            this.profile_path = user.profile
+                            this.pro=user.profile
+                        }
+                    })
+                }
             },
             remove() {
                 let email = sessionStorage.getItem('email');
@@ -138,6 +147,12 @@
                 })
                 console.log(newusers)
                 localStorage.setItem("instausers", JSON.stringify(newusers));
+                users.forEach(user => {
+                    if ((user.moboremail == email) || (user.uname == email) || (user.email == email)) {
+                        this.profile_path = user.profile
+                        this.pro=user.profile
+                    }
+                })
             }
         }
     }

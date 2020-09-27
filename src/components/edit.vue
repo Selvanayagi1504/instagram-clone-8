@@ -16,7 +16,6 @@
                     <img :src="require('./images/discover.png')" class="icon-side" />
                     <img :src="require('./images/activity.png')" class="icon-side" />
                     <router-link to="/profile">
-                        <!-- <img :src="require('./images/profile-icon.png')" class="icon-side" /> -->
                         <img :src="`${pro}`" style="width: 7%;border-radius: 16px;" />
 
                     </router-link>
@@ -618,9 +617,6 @@
                 if (this.email && !this.validEmail(this.email)) {
                     alert('Valid email required.');
                 }
-                // if (!this.validBio(this.bio)) {
-                //     alert('maximum 300 words only');
-                // }
                 users.forEach(user => {
                     if ((user.moboremail == email) || (user.uname == email) || (user.email == email)) {
                         let cuser = {
@@ -648,10 +644,6 @@
                 var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                 return re.test(email);
             },
-            // validBio: function (bio) {
-            //     var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            //     return re.test(email);
-            // },
             changepassword() {
                 let email = sessionStorage.getItem('email');
                 let users = JSON.parse(localStorage.getItem("instausers"));
@@ -873,15 +865,7 @@
         font-size: 16px;
         margin-top: 4%;
     }
-    /* input[type="checkbox"]:checked + label:before, input[type="checkbox"] + label:before ,input[type="checkbox"]:checked + label:after,input[type="checkbox"]:focus + label::before{
-        border: 1px solid rgba(var(--ca6,219,219,219),1);
-    border-radius: 3px;
-    display: inline-block;
-    height: 16px;
-    margin: 0 8px 0 3px;
-    position: relative;
-    width: 16px;
-    } */
+   
     .email-inner {
         color: darkgrey;
     }
@@ -896,9 +880,7 @@
   display: block;
   position: relative;
   padding-left: 35px;
-  /* margin-bottom: 12px; */
   cursor: pointer;
-  /* font-size: 22px; */
   font-size: 14px;
     font-weight: 600;
   -webkit-user-select: none;
@@ -907,14 +889,12 @@
   user-select: none;
 }
 
-/* Hide the browser's default radio button */
 .container input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
 }
 
-/* Create a custom radio button */
 .checkmark {
   position: absolute;
   top: 0;

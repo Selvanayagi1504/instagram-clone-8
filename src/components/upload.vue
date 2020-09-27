@@ -14,7 +14,6 @@
                      <img :src="require('./images/discover.png')" class="icon-side" />
                      <img :src="require('./images/activity.png')" class="icon-side" />
                      <router-link to="/profile">
-                        <!-- <img :src="require('./images/profile-icon.png')" class="icon-side" /> -->
                         <img :src="`${pro}`" style="width: 7%;border-radius: 16px;"/>
                      </router-link>
                 </div>
@@ -78,12 +77,10 @@
                 temp:"",
                 like:0,
                 t:require('../components/images/activity.png')
-                // comments: []
             }
         },
         mounted() {
             this.cats = []
-            // this.comment = []
             let email = sessionStorage.getItem('email');
             let users = JSON.parse(localStorage.getItem("instausers"));
             console.log(email)
@@ -102,14 +99,8 @@
                             date:post.date
                         }
                         this.like=parseInt(post.likes)
-                        // console.log(this.like)
                         this.cats.push(sam);
-                        // console.log(this.cats)
-                        // this.comments.push(post.comment);
-                        // console.log(post.path)
-                        // console.log(post.comment)
                     })
-                // }
             })
         },
         methods:{
@@ -168,11 +159,9 @@
                     }
                 })
                 localStorage.setItem("instausers", JSON.stringify(newusers));
-                // console.log(img)
                this.temp=this.image1;
                 this.image1 = this.image2;
                 this.image2=this.temp;
-                
             }
         }
     }
